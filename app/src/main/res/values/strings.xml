@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">CreditCardFlow</string>
+
+    <string name="credit_cards_add_edit_add_title">Add new Card</string>
+    <string name="credit_cards_add_edit_edit_title">Edit Card</string>
+    <string name="credit_cards_ic_next">Next</string>
+    <string name="credit_card_type_hint">Type</string>
+    <string name="credit_card_priority_hint">Priority</string>
+    <string name="credit_card_save">Save Card</string>
+    <string name="credit_card_set_type_title">Set Type</string>
+    <string name="credit_card_set_priority_title">Set Priority</string>
+    <string name="credit_card_priority_primary">Primary</string>
+    <string name="credit_card_priority_secondary">Secondary</string>
+    <string name="credit_card_type_business">Business</string>
+    <string name="credit_card_type_personal">Personal</string>
+    <string name="credit_card_number_is_not_valid">Credit card number is not valid</string>
+    <string name="credit_card_holder_is_not_valid">Credit card\'s holder is not valid</string>
+    <string name="credit_card_expiry_date_is_not_valid">Credit card\'s expiry date is not valid</string>
+    <string name="credit_card_type_is_empty">Choose one of credit card\'s types</string>
+    <string name="credit_card_priority_is_empty">Choose one of credit card\'s priorities</string>
+    <string name="credit_card_cvv_is_not_valid">Credit card\'s CVV is not valid</string>
+    <string name="credit_card_failed_to_save">Failed to save credit card</string>
+    <string name="credit_card_successfully_saved_title">Successfully saved!</string>
+    <string name="credit_card_successfully_saved_back_to_payment_options">Back to payment options</string>
+    <string name="credit_card_number_format" translatable="false">•••• %1$s</string>
+    <string name="error_expiry_date_in_the_past">Credit card expiry date is in the past. Please make sure to enter a valid credit card!</string>
+
+    <string name="label_card_number" translatable="false">0000 0000 0000 0000</string>
+    <string name="label_expired_date" translatable="false">00/00</string>
+    <string name="label_card_holder">Your Name</string>
+    <string name="label_cvv_code" translatable="false">CVC</string>
+    <string name="hint_card_number">Card Number</string>
+    <string name="hint_expired_date">Expiration</string>
+    <string name="hint_card_holder">Card Holder</string>
+    <string name="hint_cvv_code" translatable="false">CVC</string>
+
+    <string name="dialog_card_confirmation_text">Are you sure, you want to quit this screen? All unsaved changes will be lost.</string>
+    <string name="dialog_confirmation">Please confirm</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="font_family_regular" translatable="false">sans-serif</string>
+
+    <string name="alert_ok">Set</string>
+    <string name="alert_cancel">Cancel</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/ic_next"
+        android:visible="false"
+        app:actionLayout="@layout/ic_add_edit_card_next_step"
+        app:showAsAction="always"
+        tools:ignore="MenuTitle"
+        tools:visibile="true" />
+</menu>

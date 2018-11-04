@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">@android:color/white</color>
+    <color name="colorAccent">#0078c8</color>
+
+    <color name="colorControlNormal">#e5e5e5</color>
+
+    <color name="settingsColor">#142d5a</color>
+    <color name="dividerBackground">#eaeaea</color>
+    <color name="light_gray">#ffffff</color>
+    <color name="translucent_white">#80FFFFFF</color>
+    <color name="dark_gray">#243037</color>
+</resources>
