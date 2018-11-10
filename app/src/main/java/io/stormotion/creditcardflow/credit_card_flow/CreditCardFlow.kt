@@ -145,27 +145,25 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     fun currentState() = stateMachine.currentState()
 
     fun validateCreditCardNumber() {
-        mPresenter.validateCreditCardNumber(
-                input_edit_card_number.text.removeNotDigits().toString()
-        )
+        mPresenter.validateCreditCardNumber(creditCardNumber().removeNotDigits().toString())
     }
 
     fun validateCreditCardExpiryDate() {
-        mPresenter.validateCreditCardExpiryDate(input_edit_expired_date.text.toString())
+        mPresenter.validateCreditCardExpiryDate(creditCardExpiryDate())
     }
 
     fun validateCreditCardHolder() {
-        mPresenter.validateCreditCardHolder(input_edit_card_holder.text.toString())
+        mPresenter.validateCreditCardHolder(creditCardHolder())
     }
 
     fun validateCreditCardCVV() {
-        mPresenter.validateCreditCardCVV(input_edit_cvv_code.text.toString())
+        mPresenter.validateCreditCardCVV(creditCardCvvCode())
     }
 
     @SuppressWarnings("unused")
-    fun creditCardType() = CreditCardEnum.getCreditCardByNumber(creditCardNumberWithoutNotDigits().toString())
+    fun creditCardType() = CreditCardEnum.getCreditCardByNumber(creditCardNumberWithoutNotDigits())
 
-    fun creditCardNumberWithoutNotDigits() = creditCardNumber().removeNotDigits()
+    fun creditCardNumberWithoutNotDigits() = creditCardNumber().removeNotDigits().toString()
 
     fun creditCardNumber() = input_edit_card_number.text.toString()
 
@@ -339,7 +337,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     private fun optionallyFillExpirationDateMonth() {
         if (input_edit_expired_date.text.length == 4 &&
                 input_edit_expired_date.text.startsWith("1")) {
-            var input = input_edit_expired_date.text.toString()
+            var input = creditCardExpiryDate()
             input = input.replace("/", "");
             val buffer = StringBuffer("0$input")
             buffer.insert(buffer.length - 2, "/")
@@ -451,7 +449,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 val checkCardNumber = {
                     //though it is called onAnimationEnd, isRunning still can return true, so we add it to message queue
                     Handler().post {
-                        mPresenter.getCreditCardLogo(input_edit_card_number.text.removeNotDigits().toString())
+                        mPresenter.getCreditCardLogo(creditCardNumberWithoutNotDigits())
                     }
                 }
                 outSet!!.setTarget(outTarget)
