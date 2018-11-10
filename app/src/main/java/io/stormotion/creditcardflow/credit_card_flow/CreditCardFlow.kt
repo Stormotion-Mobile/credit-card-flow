@@ -131,50 +131,62 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         mCreditCardFlowListener = creditCardFlowListener
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardNumberHeaderStyle(@StyleRes styleResId: Int) {
         active_card_number_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardNumberValueStyle(@StyleRes styleResId: Int) {
         active_card_number_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardNumberHeaderStyle(@StyleRes styleResId: Int) {
         inactive_card_number_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardNumberValueStyle(@StyleRes styleResId: Int) {
         inactive_card_number_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardExpiryDateHeaderStyle(@StyleRes styleResId: Int) {
         active_expiry_date_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardExpiryDateValueStyle(@StyleRes styleResId: Int) {
         active_expiry_date_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardExpiryDateHeaderStyle(@StyleRes styleResId: Int) {
         inactive_expiry_date_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardExpiryDateValueStyle(@StyleRes styleResId: Int) {
         inactive_expiry_date_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardHolderHeaderStyle(@StyleRes styleResId: Int) {
         active_card_holder_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setActiveCreditCardHolderValueStyle(@StyleRes styleResId: Int) {
         active_card_holder_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardHolderHeaderStyle(@StyleRes styleResId: Int) {
         inactive_card_holder_header.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setInactiveCreditCardHolderValueStyle(@StyleRes styleResId: Int) {
         inactive_card_holder_value.setTextAppearanceCompat(styleResId)
     }
