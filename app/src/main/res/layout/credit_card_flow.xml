@@ -69,13 +69,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_expired_date"
+            android:id="@+id/input_layout_expiry_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/input_edit_expired_date"
+                android:id="@+id/input_edit_expiry_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"

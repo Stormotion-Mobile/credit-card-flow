@@ -191,8 +191,29 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         inactive_card_holder_value.setTextAppearanceCompat(styleResId)
     }
 
+    @SuppressWarnings("unused")
     fun setCardCvvStyle(@StyleRes styleResId: Int) {
         card_cvv.setTextAppearanceCompat(styleResId)
+    }
+
+    @SuppressWarnings("unused")
+    fun setInputCreditCardNumberStyle(@StyleRes styleResId: Int) {
+        input_edit_card_number.setTextAppearanceCompat(styleResId)
+    }
+
+    @SuppressWarnings("unused")
+    fun setInputCreditCardHolderStyle(@StyleRes styleResId: Int) {
+        input_edit_card_holder.setTextAppearanceCompat(styleResId)
+    }
+
+    @SuppressWarnings("unused")
+    fun setInputCreditCardExpiryDateStyle(@StyleRes styleResId: Int) {
+        input_edit_expiry_date.setTextAppearanceCompat(styleResId)
+    }
+
+    @SuppressWarnings("unused")
+    fun setInputCreditCardCvvStyle(@StyleRes styleResId: Int) {
+        input_edit_cvv_code.setTextAppearanceCompat(styleResId)
     }
 
     override fun setPresenter(presenter: CreditCardFlowContract.Presenter) {
@@ -236,7 +257,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
     fun creditCardHolder() = input_edit_card_holder.text.toString()
 
-    fun creditCardExpiryDate() = input_edit_expired_date.text.toString()
+    fun creditCardExpiryDate() = input_edit_expiry_date.text.toString()
 
     fun creditCardCvvCode() = input_edit_cvv_code.text.toString()
 
@@ -296,7 +317,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         }
 
         var expiredDate = ""
-        input_edit_expired_date.afterTextChanged { s ->
+        input_edit_expiry_date.afterTextChanged { s ->
             if (expiredDate.length < s.length) {
                 if (s.length == 1) {
                     val month = s.toString().toIntOrNull()
@@ -345,7 +366,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     0 -> {
                         updateProgressBar(25)
                         input_edit_card_number.isFocusableInTouchMode = true
-                        input_edit_expired_date.isFocusable = false
+                        input_edit_expiry_date.isFocusable = false
                         input_edit_card_holder.isFocusable = false
                         input_edit_cvv_code.isFocusable = false
                         input_edit_card_number.requestFocus()
@@ -354,16 +375,16 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     1 -> {
                         updateProgressBar(50)
                         input_edit_card_number.isFocusable = false
-                        input_edit_expired_date.isFocusableInTouchMode = true
+                        input_edit_expiry_date.isFocusableInTouchMode = true
                         input_edit_card_holder.isFocusable = false
                         input_edit_cvv_code.isFocusable = false
-                        input_edit_expired_date.requestFocus()
+                        input_edit_expiry_date.requestFocus()
                         return
                     }
                     2 -> {
                         updateProgressBar(75)
                         input_edit_card_number.isFocusable = false
-                        input_edit_expired_date.isFocusable = false
+                        input_edit_expiry_date.isFocusable = false
                         input_edit_card_holder.isFocusableInTouchMode = true
                         input_edit_cvv_code.isFocusable = false
                         input_edit_card_holder.requestFocus()
@@ -372,7 +393,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     3 -> {
                         updateProgressBar(100)
                         input_edit_card_number.isFocusable = false
-                        input_edit_expired_date.isFocusable = false
+                        input_edit_expiry_date.isFocusable = false
                         input_edit_card_holder.isFocusable = false
                         input_edit_cvv_code.isFocusableInTouchMode = true
                         input_edit_cvv_code.requestFocus()
@@ -380,7 +401,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     }
                     4 -> {
                         input_edit_card_number.isFocusable = false
-                        input_edit_expired_date.isFocusable = false
+                        input_edit_expiry_date.isFocusable = false
                         input_edit_card_holder.isFocusable = false
                         input_edit_cvv_code.isFocusable = false
                         return
@@ -402,13 +423,13 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
      * 4. Set the result to the input text
      */
     private fun optionallyFillExpirationDateMonth() {
-        if (input_edit_expired_date.text.length == 4 &&
-                input_edit_expired_date.text.startsWith("1")) {
+        if (input_edit_expiry_date.text.length == 4 &&
+                input_edit_expiry_date.text.startsWith("1")) {
             var input = creditCardExpiryDate()
             input = input.replace("/", "");
             val buffer = StringBuffer("0$input")
             buffer.insert(buffer.length - 2, "/")
-            input_edit_expired_date.text.replace(0, input_edit_expired_date.text.length, buffer.toString())
+            input_edit_expiry_date.text.replace(0, input_edit_expiry_date.text.length, buffer.toString())
         }
     }
 
@@ -421,7 +442,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             }
             handled
         })
-        input_edit_expired_date.setOnEditorActionListener({ _, actionId, _ ->
+        input_edit_expiry_date.setOnEditorActionListener({ _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
                 optionallyFillExpirationDateMonth()
@@ -452,7 +473,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         card?.let {
             with(card!!) {
                 input_edit_card_number.setText(number)
-                input_edit_expired_date.setText(expiryDate)
+                input_edit_expiry_date.setText(expiryDate)
                 input_edit_cvv_code.setText(cvc)
                 val priority = resources.getString(if (isPrimary?.let { it } == true)
                     R.string.credit_card_priority_primary
@@ -612,7 +633,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             var resId = 0
             when (position) {
                 0 -> resId = R.id.input_layout_card_number
-                1 -> resId = R.id.input_layout_expired_date
+                1 -> resId = R.id.input_layout_expiry_date
                 2 -> resId = R.id.input_layout_card_holder
                 3 -> resId = R.id.input_layout_cvv_code
                 4 -> resId = R.id.space
