@@ -162,6 +162,11 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         mPresenter.validateCreditCardCVV(input_edit_cvv_code.text.toString())
     }
 
+    @SuppressWarnings("unused")
+    fun creditCardType() = CreditCardEnum.getCreditCardByNumber(creditCardNumberWithoutNotDigits().toString())
+
+    fun creditCardNumberWithoutNotDigits() = creditCardNumber().removeNotDigits()
+
     fun creditCardNumber() = input_edit_card_number.text.toString()
 
     fun creditCardHolder() = input_edit_card_holder.text.toString()
