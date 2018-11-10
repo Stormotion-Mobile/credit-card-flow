@@ -1,6 +1,7 @@
-package io.stormotion.creditcardflow
+package io.stormotion.creditcardflow.credit_card_flow
 
 import android.support.annotation.DrawableRes
+import io.stormotion.creditcardflow.R
 import java.util.regex.Pattern
 
 enum class CreditCardEnum(val naming: String?, @DrawableRes val cardDrawable: Int?, @DrawableRes val gradientDrawable: Int?, val pattern: String?) {

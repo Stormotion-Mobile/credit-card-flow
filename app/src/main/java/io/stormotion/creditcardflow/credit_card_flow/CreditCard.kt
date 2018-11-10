@@ -1,4 +1,4 @@
-package io.stormotion.creditcardflow
+package io.stormotion.creditcardflow.credit_card_flow
 
 import java.io.Serializable
 
