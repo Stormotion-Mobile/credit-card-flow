@@ -21,7 +21,7 @@
 
             <include layout="@layout/credit_card_active_front_side" />
 
-            <include layout="@layout/credit_card_inactive" />
+            <include layout="@layout/credit_card_inactive_front_side" />
 
         </RelativeLayout>
 

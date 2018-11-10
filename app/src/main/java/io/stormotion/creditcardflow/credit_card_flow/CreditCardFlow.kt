@@ -3,7 +3,9 @@ package io.stormotion.creditcardflow.credit_card_flow
 import android.animation.*
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Handler
+import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -14,12 +16,13 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.inputmethod.EditorInfo
 import android.widget.RelativeLayout
+import android.widget.TextView
 import io.stormotion.creditcardflow.R
 import io.stormotion.creditcardflow.afterTextChanged
 import kotlinx.android.synthetic.main.credit_card_active_bottom_side.view.*
 import kotlinx.android.synthetic.main.credit_card_active_front_side.view.*
 import kotlinx.android.synthetic.main.credit_card_flow.view.*
-import kotlinx.android.synthetic.main.credit_card_inactive.view.*
+import kotlinx.android.synthetic.main.credit_card_inactive_front_side.view.*
 import kotlinx.android.synthetic.main.credit_card_type_and_priority.view.*
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
@@ -128,6 +131,58 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         mCreditCardFlowListener = creditCardFlowListener
     }
 
+    fun setActiveCreditCardNumberHeaderStyle(@StyleRes styleResId: Int) {
+        active_card_number_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setActiveCreditCardNumberValueStyle(@StyleRes styleResId: Int) {
+        active_card_number_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardNumberHeaderStyle(@StyleRes styleResId: Int) {
+        inactive_card_number_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardNumberValueStyle(@StyleRes styleResId: Int) {
+        inactive_card_number_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setActiveCreditCardExpiryDateHeaderStyle(@StyleRes styleResId: Int) {
+        active_expiry_date_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setActiveCreditCardExpiryDateValueStyle(@StyleRes styleResId: Int) {
+        active_expiry_date_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardExpiryDateHeaderStyle(@StyleRes styleResId: Int) {
+        inactive_expiry_date_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardExpiryDateValueStyle(@StyleRes styleResId: Int) {
+        inactive_expiry_date_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setActiveCreditCardHolderHeaderStyle(@StyleRes styleResId: Int) {
+        active_card_holder_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setActiveCreditCardHolderValueStyle(@StyleRes styleResId: Int) {
+        active_card_holder_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardHolderHeaderStyle(@StyleRes styleResId: Int) {
+        inactive_card_holder_header.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setInactiveCreditCardHolderValueStyle(@StyleRes styleResId: Int) {
+        inactive_card_holder_value.setTextAppearanceCompat(styleResId)
+    }
+
+    fun setCardCvvStyle(@StyleRes styleResId: Int) {
+        card_cvv.setTextAppearanceCompat(styleResId)
+    }
+
     override fun setPresenter(presenter: CreditCardFlowContract.Presenter) {
         mPresenter = presenter
     }
@@ -200,8 +255,8 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 cardNumberLock = true
                 s.replace(0, s.length, prettyFormatCreditCardNumber(noWhiteSpacesCardNumber))
                 mPresenter.getCreditCardLogo(noWhiteSpacesCardNumber)
-                text_card_number.text = s.toString()
-                label_card_number.text = s.toString().replace(SPACING_CREDIT_NUMBER, " ")
+                active_card_number_value.text = s.toString()
+                inactive_card_number_value.text = s.toString().replace(SPACING_CREDIT_NUMBER, " ")
                 cardNumberLock = false
             } else if (!cardNumberLock) {
                 cardNumberLock = true
@@ -210,8 +265,8 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                         endIndex = noWhiteSpacesCardNumber.length)
                 s.replace(0, s.length, prettyFormatCreditCardNumber(savedCharacters))
                 mPresenter.getCreditCardLogo(noWhiteSpacesCardNumber)
-                text_card_number.text = s.toString()
-                label_card_number.text = s.toString().replace(SPACING_CREDIT_NUMBER, " ")
+                active_card_number_value.text = s.toString()
+                inactive_card_number_value.text = s.toString().replace(SPACING_CREDIT_NUMBER, " ")
                 cardNumberLock = false
             }
         }
@@ -223,7 +278,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 val onlyLettersAndSpacesCardHolder = s.filter { it.isLetter() || it.isWhitespace() }
                 val onlySingleSpaceBetweenWords = onlyLettersAndSpacesCardHolder.trimStart().replace(Regex("\\s+"), " ")
                 s.replace(0, s.length, onlySingleSpaceBetweenWords)
-                text_card_holder.text = s.toString()
+                active_card_holder_value.text = s.toString()
                 cardHolderLock = false
             }
         }
@@ -252,12 +307,12 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 }
             }
             expiredDate = s.toString()
-            text_expired_date.text = expiredDate
+            active_expiry_date_value.text = expiredDate
         }
 
         input_edit_cvv_code.afterTextChanged { s ->
-            text_cvc.text = s.toString()
-            text_cvc.inputType = if (s.toString().isEmpty()) {
+            card_cvv.text = s.toString()
+            card_cvv.inputType = if (s.toString().isEmpty()) {
                 InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
             } else {
                 InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
@@ -529,6 +584,14 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             inSet!!.start()
         }
 
+    }
+
+    private fun TextView.setTextAppearanceCompat(styleResId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setTextAppearance(styleResId)
+        } else {
+            setTextAppearance(context, styleResId)
+        }
     }
 
     private inner class MyPagerAdapter : PagerAdapter() {

@@ -22,7 +22,7 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/card_number_title"
+            android:id="@+id/inactive_card_number_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -31,10 +31,10 @@
             android:textColor="#666666"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/label_card_number" />
+            app:layout_constraintBottom_toTopOf="@+id/inactive_card_number_value" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/label_card_number"
+            android:id="@+id/inactive_card_number_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -53,7 +53,7 @@
 
 
         <TextView
-            android:id="@+id/card_holder_title"
+            android:id="@+id/inactive_card_holder_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -64,10 +64,10 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_card_number" />
+            app:layout_constraintTop_toBottomOf="@+id/inactive_card_number_value" />
 
         <TextView
-            android:id="@+id/label_card_holder"
+            android:id="@+id/inactive_card_holder_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -82,12 +82,12 @@
             android:textStyle="normal"
             android:typeface="monospace"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_holder_title"
+            app:layout_constraintTop_toBottomOf="@+id/inactive_card_holder_header"
             tools:text="asddsadasda das das asdasdasd"/>
 
 
         <TextView
-            android:id="@+id/expired_date_title"
+            android:id="@+id/inactive_expiry_date_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -101,10 +101,10 @@
             android:textStyle="bold"
             android:typeface="monospace"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_card_number" />
+            app:layout_constraintTop_toBottomOf="@+id/inactive_card_number_value" />
 
         <TextView
-            android:id="@+id/label_expired_date"
+            android:id="@+id/inactive_expiry_date_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -118,8 +118,8 @@
             android:textStyle="normal"
             android:typeface="monospace"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@id/expired_date_title"
-            app:layout_constraintTop_toBottomOf="@+id/expired_date_title" />
+            app:layout_constraintStart_toStartOf="@id/inactive_expiry_date_header"
+            app:layout_constraintTop_toBottomOf="@+id/inactive_expiry_date_header" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
