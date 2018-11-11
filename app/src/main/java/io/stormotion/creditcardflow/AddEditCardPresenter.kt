@@ -27,7 +27,6 @@ class AddEditCardPresenter(val view: AddEditCardContract.View) : AddEditCardCont
                                 expiryDate: String,
                                 cvv: String,
                                 type: AddEditCardContract.CardType,
-                                isAirplus: Boolean,
                                 isPrimary: Boolean) {
         view.showCreditCardSavedSuccessfully()
     }

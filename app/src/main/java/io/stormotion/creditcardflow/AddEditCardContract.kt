@@ -12,7 +12,6 @@ interface AddEditCardContract {
                            expiryDate: String,
                            cvv: String,
                            type: CardType,
-                           isAirplus: Boolean,
                            isPrimary: Boolean)
     }
 

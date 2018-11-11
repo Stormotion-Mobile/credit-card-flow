@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import io.stormotion.creditcardflow.credit_card_flow.*
+import io.stormotion.creditcardflow.credit_card_flow.CardFlowState
+import io.stormotion.creditcardflow.credit_card_flow.CreditCardFlow
+import io.stormotion.creditcardflow.credit_card_flow.CreditCardFlowListener
 import io.stormotion.creditcardflow.mvp.BaseFragment
 import kotlinx.android.synthetic.main.add_edit_credit_card_fragment.*
 import kotlinx.android.synthetic.main.credit_card_flow.*
@@ -83,7 +85,9 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
         super.onViewCreated(view, savedInstanceState)
 
         mCreditCardFlow = getView()!!.findViewById<CreditCardFlow>(R.id.credit_card_flow).apply {
-            setCreditCard(arguments!!.getSerializable(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard?)
+            setCreditCard((arguments!!.getSerializable(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard?)?.let {
+                io.stormotion.creditcardflow.credit_card_flow.CreditCard(it.number, it.holderName, it.cvc, it.expiryDate)
+            })
             setCreditCardFlowListener(object : CreditCardFlowListener {
                 override fun onCardNumberBeforeChangeToNext() {
                 }
@@ -206,13 +210,6 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
     }
 
     private fun save() {
-        val card = CreditCard(
-                number = mCreditCardFlow.creditCardNumber(),
-                expiryDate = mCreditCardFlow.creditCardExpiryDate(),
-                holderName = mCreditCardFlow.creditCardHolder(),
-                cvc = mCreditCardFlow.creditCardCvvCode()
-        )
-
         val creditCardType = credit_card_type.text.toString()
         val creditCardPriority = credit_card_priority.text.toString()
 
@@ -221,10 +218,6 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                 holderName = mCreditCardFlow.creditCardHolder(),
                 expiryDate = mCreditCardFlow.creditCardExpiryDate(),
                 cvv = mCreditCardFlow.creditCardCvvCode(),
-                isAirplus = card?.let
-                {
-                    it.type == CreditCardEnum.AIRPLUS.naming
-                } ?: false,
                 type = when (creditCardType) {
                     resources.getString(AddEditCardFragment.CardType.PERSONAL.textRes) -> AddEditCardContract.CardType.PERSONAL
                     resources.getString(AddEditCardFragment.CardType.BUSINESS.textRes) -> AddEditCardContract.CardType.BUSINESS

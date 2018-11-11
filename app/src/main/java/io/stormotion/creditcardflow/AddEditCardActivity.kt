@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import io.stormotion.creditcardflow.AddEditCardFragment.Companion.ADD_EDIT_CARD_CREDIT_CARD_EXTRA
-import io.stormotion.creditcardflow.credit_card_flow.CreditCard
 
 
 class AddEditCardActivity : BaseSettingsActivity() {
