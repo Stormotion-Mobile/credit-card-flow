@@ -58,7 +58,7 @@ class AddEditCardActivity : BaseSettingsActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.contentFrame)
-        currentFragment.onOptionsItemSelected(item)
+        currentFragment!!.onOptionsItemSelected(item)
         return true
     }
 }

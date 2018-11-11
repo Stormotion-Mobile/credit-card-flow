@@ -423,13 +423,13 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
      * 4. Set the result to the input text
      */
     private fun optionallyFillExpirationDateMonth() {
-        if (input_edit_expiry_date.text.length == 4 &&
-                input_edit_expiry_date.text.startsWith("1")) {
+        if (input_edit_expiry_date.text!!.length == 4 &&
+                input_edit_expiry_date.text!!.startsWith("1")) {
             var input = creditCardExpiryDate()
             input = input.replace("/", "");
             val buffer = StringBuffer("0$input")
             buffer.insert(buffer.length - 2, "/")
-            input_edit_expiry_date.text.replace(0, input_edit_expiry_date.text.length, buffer.toString())
+            input_edit_expiry_date.text!!.replace(0, input_edit_expiry_date.text!!.length, buffer.toString())
         }
     }
 
@@ -619,6 +619,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
     }
 
+    @Suppress("DEPRECATION")
     private fun TextView.setTextAppearanceCompat(styleResId: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setTextAppearance(styleResId)
