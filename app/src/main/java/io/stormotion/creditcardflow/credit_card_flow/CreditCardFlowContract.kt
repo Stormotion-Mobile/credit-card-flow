@@ -29,8 +29,4 @@ interface CreditCardFlowContract {
         fun showCreditCardCvvValidatedSuccessfully()
         fun showCreditCardCvvFailedToValidate()
     }
-
-    enum class CardType {
-        PERSONAL, BUSINESS
-    }
 }
