@@ -3,7 +3,6 @@ package io.stormotion.creditcardflow
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.StringRes
 import android.view.MenuItem
 import io.stormotion.creditcardflow.AddEditCardFragment.Companion.ADD_EDIT_CARD_CREDIT_CARD_EXTRA
 import io.stormotion.creditcardflow.credit_card_flow.CreditCard
@@ -12,14 +11,11 @@ import io.stormotion.creditcardflow.credit_card_flow.CreditCard
 class AddEditCardActivity : BaseSettingsActivity() {
 
     companion object {
-        fun getInstance(activity: Activity, @StringRes toolbarTitleRes: Int, creditCard: CreditCard?) =
+        fun getInstance(activity: Activity, creditCard: CreditCard?) =
                 Intent(activity, AddEditCardActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                    putExtra(ADD_EDIT_CARD_TITLE_RES_EXTRA, toolbarTitleRes)
                     putExtra(ADD_EDIT_CARD_CREDIT_CARD_EXTRA, creditCard)
                 }
-
-        private const val ADD_EDIT_CARD_TITLE_RES_EXTRA = "add_edit_card_title_res_extra"
     }
 
 
@@ -34,7 +30,7 @@ class AddEditCardActivity : BaseSettingsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val card = CreditCard()
+        val card = intent.getSerializableExtra(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard
 
         val currentFragment = (supportFragmentManager.findFragmentById(R.id.contentFrame) as AddEditCardFragment?)?.let {
             it

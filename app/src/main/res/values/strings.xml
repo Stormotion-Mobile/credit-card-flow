@@ -43,4 +43,6 @@
 
     <string name="alert_ok">Set</string>
     <string name="alert_cancel">Cancel</string>
+    <string name="edit_credit_card">Edit credit card</string>
+    <string name="add_credit_card">Add credit card</string>
 </resources>

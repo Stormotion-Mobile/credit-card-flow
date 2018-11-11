@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.credit_card_active_bottom_side.view.*
 import kotlinx.android.synthetic.main.credit_card_active_front_side.view.*
 import kotlinx.android.synthetic.main.credit_card_flow.view.*
 import kotlinx.android.synthetic.main.credit_card_inactive_front_side.view.*
-import kotlinx.android.synthetic.main.credit_card_type_and_priority.view.*
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
 
@@ -224,8 +223,9 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     @SuppressWarnings("unused")
-    fun setCreditCard(creditCard: CreditCard) {
+    fun setCreditCard(creditCard: CreditCard?) {
         card = creditCard
+        updateViews()
     }
 
     @SuppressWarnings("unused")
@@ -278,7 +278,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         inSet = AnimatorInflater.loadAnimator(context, R.animator.card_flip_in) as AnimatorSet
         outSet = AnimatorInflater.loadAnimator(context, R.animator.card_flip_out) as AnimatorSet
 
-        setViewsIfCardIsNotNull()
+        updateViews()
     }
 
     private fun setTextListeners() {
@@ -472,22 +472,12 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         })
     }
 
-    private fun setViewsIfCardIsNotNull() {
-        card?.let {
-            with(card!!) {
-                input_edit_card_number.setText(number)
-                input_edit_expiry_date.setText(expiryDate)
-                input_edit_cvv_code.setText(cvc)
-                val priority = resources.getString(if (isPrimary?.let { it } == true)
-                    R.string.credit_card_priority_primary
-                else
-                    R.string.credit_card_priority_secondary
-                )
-                credit_card_priority.setText(priority)
-                credit_card_type.setText(type)
-                mPresenter.getCreditCardLogo(company ?: "")
-            }
-            validateCreditCardNumber() //to flip to active state if it is during edit
+    private fun updateViews() {
+        (card?.let { it } ?: CreditCard()).apply {
+            input_edit_card_number.setText(number)
+            input_edit_expiry_date.setText(expiryDate)
+            input_edit_card_holder.setText(holderName)
+            input_edit_cvv_code.setText(cvc)
         }
     }
 
