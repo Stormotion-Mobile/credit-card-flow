@@ -119,7 +119,10 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
     override fun showCreditCardCvvValidatedSuccessfully() {
         stateMachine.nextState()
-        mCreditCardFlowListener?.onCardCvvValidatedSuccessfully(creditCardCvvCode())
+        mCreditCardFlowListener?.apply {
+            onCardCvvValidatedSuccessfully(creditCardCvvCode())
+            onCreditCardFlowFinished(creditCardNumber(), creditCardExpiryDate(), creditCardHolder(), creditCardCvvCode())
+        }
     }
 
     override fun showCreditCardCvvFailedToValidate() {

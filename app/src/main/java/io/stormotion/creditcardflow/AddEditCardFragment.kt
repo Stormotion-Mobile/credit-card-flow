@@ -149,6 +149,9 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
 
             override fun onCardCvvValidationFailed(cvv: String) {
             }
+
+            override fun onCreditCardFlowFinished(cardNumber: String, cardExpiryDate: String, cardHolder: String, cardCvvCode: String) {
+            }
         })
 
         configureTypeAndPriorityViews(activity!!.fragmentManager)
