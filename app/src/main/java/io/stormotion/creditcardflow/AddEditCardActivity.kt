@@ -30,7 +30,7 @@ class AddEditCardActivity : BaseSettingsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val card = intent.getSerializableExtra(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard
+        val card = intent.getSerializableExtra(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard?
 
         val currentFragment = (supportFragmentManager.findFragmentById(R.id.contentFrame) as AddEditCardFragment?)?.let {
             it
