@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
+import android.os.Parcelable
 import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
@@ -64,6 +65,31 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         mPresenter.unsubscribe()
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+
+        val ss = SavedState(superState)
+
+        ss.cardToSave = CreditCard(creditCardNumber(),
+                creditCardHolder(),
+                creditCardCvvCode(),
+                creditCardExpiryDate()
+        )
+
+        return ss
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state !is SavedState) {
+            super.onRestoreInstanceState(state)
+            return
+        }
+
+        super.onRestoreInstanceState(state.superState)
+
+        this.card = state.cardToSave
     }
 
     override fun showCreditCardLogo(creditCardEnum: CreditCardEnum) {
@@ -277,8 +303,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
         inSet = AnimatorInflater.loadAnimator(context, R.animator.card_flip_in) as AnimatorSet
         outSet = AnimatorInflater.loadAnimator(context, R.animator.card_flip_out) as AnimatorSet
-
-        updateViews()
     }
 
     private fun setTextListeners() {
@@ -715,4 +739,5 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             }
         }
     }
+
 }
