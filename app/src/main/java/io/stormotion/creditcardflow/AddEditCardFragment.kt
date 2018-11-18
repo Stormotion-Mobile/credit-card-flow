@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.FragmentManager
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
@@ -85,80 +86,92 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
         super.onViewCreated(view, savedInstanceState)
 
         mCreditCardFlow = getView()!!.findViewById<CreditCardFlow>(R.id.credit_card_flow).apply {
-            setCreditCard((arguments!!.getSerializable(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard?)?.let {
-                io.stormotion.creditcardflow.credit_card_flow.CreditCard(it.number, it.holderName, it.cvc, it.expiryDate)
-            })
-            setCreditCardFlowListener(object : CreditCardFlowListener {
-                override fun onCardNumberBeforeChangeToNext() {
-                }
+            Handler().post({
+                setCreditCard((arguments!!.getSerializable(ADD_EDIT_CARD_CREDIT_CARD_EXTRA) as CreditCard?)?.let {
+                    io.stormotion.creditcardflow.credit_card_flow.CreditCard(it.number, it.holderName, it.cvc, it.expiryDate)
+                })
+                setCreditCardFlowListener(object : CreditCardFlowListener {
+                    override fun onCardNumberBeforeChangeToNext() {
+                    }
 
-                override fun onCardExpiryDateBeforeChangeToNext() {
-                }
+                    override fun onCardExpiryDateBeforeChangeToNext() {
+                    }
 
-                override fun onCardHolderBeforeChangeToNext() {
-                }
+                    override fun onCardHolderBeforeChangeToNext() {
+                    }
 
-                override fun onFromActiveToInactiveAnimationStart() {
-                    mNextMenuItem.isVisible = false
-                }
+                    override fun onFromActiveToInactiveAnimationStart() {
+                        mNextMenuItem.isVisible = false
+                    }
 
-                override fun onFromInactiveToActiveAnimationStart() {
-                    mNextMenuItem.isVisible = true
-                }
+                    override fun onFromInactiveToActiveAnimationStart() {
+                        mNextMenuItem.isVisible = true
+                    }
 
-                override fun onCardCvvBeforeChangeToNext() {
-                    mNextMenuItem.isVisible = false
-                    add_edit_card_steps_view_flipper.displayedChild = AddEditCardFragment.Companion.PositionInViewFlipper.CREDIT_CARD_TYPE_PRIORITY
-                    activity!!.closeSoftKeyboard()
-                }
+                    override fun onCardCvvBeforeChangeToNext() {
+                        mNextMenuItem.isVisible = false
+                        add_edit_card_steps_view_flipper.displayedChild = AddEditCardFragment.Companion.PositionInViewFlipper.CREDIT_CARD_TYPE_PRIORITY
+                        activity!!.closeSoftKeyboard()
+                    }
 
 
-                override fun onCardNumberBeforeChangeToPrevious() {
-                    activity!!.finish()
-                }
+                    override fun onCardNumberBeforeChangeToPrevious() {
+                        activity!!.finish()
+                    }
 
-                override fun onCardExpiryDateBeforeChangeToPrevious() {
-                }
+                    override fun onCardExpiryDateBeforeChangeToPrevious() {
+                    }
 
-                override fun onCardHolderBeforeChangeToPrevious() {
-                }
+                    override fun onCardHolderBeforeChangeToPrevious() {
+                    }
 
-                override fun onCardCvvBeforeChangeToPrevious() {
-                }
+                    override fun onCardCvvBeforeChangeToPrevious() {
+                    }
 
-                override fun onCardNumberValidatedSuccessfully(cardNumber: String) {
-                }
+                    override fun onCardNumberValidatedSuccessfully(cardNumber: String) {
+                    }
 
-                override fun onCardNumberValidationFailed(cardNumber: String) {
-                }
+                    override fun onCardNumberValidationFailed(cardNumber: String) {
+                    }
 
-                override fun onCardHolderValidatedSuccessfully(cardHolder: String) {
-                }
+                    override fun onCardHolderValidatedSuccessfully(cardHolder: String) {
+                    }
 
-                override fun onCardHolderValidationFailed(cardholder: String) {
-                }
+                    override fun onCardHolderValidationFailed(cardholder: String) {
+                    }
 
-                override fun onCardExpiryDateValidatedSuccessfully(expiryDate: String) {
-                }
+                    override fun onCardExpiryDateValidatedSuccessfully(expiryDate: String) {
+                    }
 
-                override fun onCardExpiryDateValidationFailed(expiryDate: String) {
-                }
+                    override fun onCardExpiryDateValidationFailed(expiryDate: String) {
+                    }
 
-                override fun onCardExpiryDateInThePast(expiryDate: String) {
-                }
+                    override fun onCardExpiryDateInThePast(expiryDate: String) {
+                    }
 
-                override fun onCardCvvValidatedSuccessfully(cvv: String) {
-                }
+                    override fun onCardCvvValidatedSuccessfully(cvv: String) {
+                    }
 
-                override fun onCardCvvValidationFailed(cvv: String) {
-                }
+                    override fun onCardCvvValidationFailed(cvv: String) {
+                    }
 
-                override fun onCreditCardFlowFinished(cardNumber: String, cardExpiryDate: String, cardHolder: String, cardCvvCode: String) {
-                }
+                    override fun onCreditCardFlowFinished(cardNumber: String, cardExpiryDate: String, cardHolder: String, cardCvvCode: String) {
+                    }
+                })
             })
         }
 
         configureTypeAndPriorityViews(activity!!.fragmentManager)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        arguments!!.putSerializable(ADD_EDIT_CARD_CREDIT_CARD_EXTRA,
+                CreditCard(mCreditCardFlow.creditCardNumber(),
+                        mCreditCardFlow.creditCardHolder(),
+                        mCreditCardFlow.creditCardCvvCode(),
+                        mCreditCardFlow.creditCardExpiryDate()
+                ))
     }
 
     override fun setPresenter(presenter: AddEditCardContract.Presenter) {
