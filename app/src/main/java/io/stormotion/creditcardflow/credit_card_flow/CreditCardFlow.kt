@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.credit_card_inactive_front_side.view.*
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
 
+//TODO add method which returns CreditCard
 class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
     companion object {
@@ -701,6 +702,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         }
     }
 
+    //TODO move state machine in presenter
     private inner class CardFlowStateMachine {
         private var state: CardFlowState = CardFlowState.INACTIVE_CARD_NUMBER
 
