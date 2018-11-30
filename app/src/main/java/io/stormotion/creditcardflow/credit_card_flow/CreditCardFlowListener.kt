@@ -1,12 +1,14 @@
 package io.stormotion.creditcardflow.credit_card_flow
 
 interface CreditCardFlowListener {
-    fun onCardNumberBeforeChangeToNext()
+    fun onInactiveCardNumberBeforeChangeToNext()
+    fun onActiveCardNumberBeforeChangeToNext()
     fun onCardExpiryDateBeforeChangeToNext()
     fun onCardHolderBeforeChangeToNext()
     fun onCardCvvBeforeChangeToNext()
 
-    fun onCardNumberBeforeChangeToPrevious()
+    fun onInactiveCardNumberBeforeChangeToPrevious()
+    fun onActiveCardNumberBeforeChangeToPrevious()
     fun onCardExpiryDateBeforeChangeToPrevious()
     fun onCardHolderBeforeChangeToPrevious()
     fun onCardCvvBeforeChangeToPrevious()

@@ -34,8 +34,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         private const val SPACING_CREDIT_NUMBER = "   "
     }
 
-    private var showingActiveFront = false //indicate if active front or inactive is shown
-    private var showingBottomFront = false //indicate if active front or active bottom is shown
     private var inSet: AnimatorSet? = null
     private var outSet: AnimatorSet? = null
     private var mCreditCardFlowListener: CreditCardFlowListener? = null
@@ -107,7 +105,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     override fun showCreditCardNumberValidatedSuccessfully() {
-        stateMachine.nextState()
+        stateMachine.changeStateToNextWithAction()
         mCreditCardFlowListener?.onCardNumberValidatedSuccessfully(creditCardNumber())
     }
 
@@ -117,7 +115,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     override fun showCreditCardHolderValidatedSuccessfully() {
-        stateMachine.nextState()
+        stateMachine.changeStateToNextWithAction()
         mCreditCardFlowListener?.onCardHolderValidatedSuccessfully(creditCardHolder())
     }
 
@@ -128,7 +126,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     override fun showCreditCardExpiryDateValidatedSuccessfully() {
-        stateMachine.nextState()
+        stateMachine.changeStateToNextWithAction()
         mCreditCardFlowListener?.onCardExpiryDateValidatedSuccessfully(creditCardExpiryDate())
     }
 
@@ -143,7 +141,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     override fun showCreditCardCvvValidatedSuccessfully() {
-        stateMachine.nextState()
+        stateMachine.changeStateToNextWithAction()
         mCreditCardFlowListener?.apply {
             onCardCvvValidatedSuccessfully(creditCardCvvCode())
             onCreditCardFlowFinished(creditCardNumber(), creditCardExpiryDate(), creditCardHolder(), creditCardCvvCode())
@@ -255,9 +253,9 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     @SuppressWarnings("unused")
-    fun nextState() = stateMachine.nextState()
+    fun nextState() = stateMachine.changeStateToNextWithAction()
 
-    fun previousState() = stateMachine.previousState()
+    fun previousState() = stateMachine.changeStateToPreviousWithAction()
 
     fun currentState() = stateMachine.currentState()
 
@@ -542,9 +540,12 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                                                             toActive: Boolean) {
         if (!outSet!!.isRunning && !inSet!!.isRunning) {
             setCreditCardLogoAppearance(logoDrawable, gradientDrawable)
-            if ((!showingActiveFront && toActive || showingActiveFront && !toActive)) {
-                showingActiveFront = toActive
-
+            if (cardPosition() == CardPosition.INACTIVE && toActive || cardPosition() == CardPosition.ACTIVE_FRONT && !toActive) {
+                if (toActive && currentState() == CardFlowState.INACTIVE_CARD_NUMBER) {
+                    nextState()
+                } else if (!toActive && currentState() == CardFlowState.ACTIVE_CARD_NUMBER) {
+                    stateMachine.changeStateToPreviousWithoutAction()
+                }
                 credit_card_inactive.cardElevation = 0f
                 credit_card_active_front_side.cardElevation = 0f
 
@@ -593,7 +594,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
      */
     private fun flipBetweenActiveFrontAndActiveBottomAppearance(toBottom: Boolean) {
         if (!outSet!!.isRunning && !inSet!!.isRunning) {
-            showingBottomFront = toBottom
 
             credit_card_inactive.cardElevation = 0f
             credit_card_active_front_side.cardElevation = 0f
@@ -605,9 +605,9 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             val checkCurrentPosition = {
                 Handler().post {
                     val currentState = stateMachine.currentState()
-                    if (showingBottomFront && currentState == CardFlowState.HOLDER) {
+                    if (cardPosition() == CardPosition.ACTIVE_BOTTOM && currentState == CardFlowState.HOLDER) {
                         flipBetweenActiveFrontAndActiveBottomAppearance(false)
-                    } else if (!showingBottomFront && currentState == CardFlowState.CVV) {
+                    } else if (cardPosition() != CardPosition.ACTIVE_BOTTOM && currentState == CardFlowState.CVV) {
                         flipBetweenActiveFrontAndActiveBottomAppearance(true)
                     }
                 }
@@ -634,6 +634,16 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             inSet!!.start()
         }
 
+    }
+
+    private fun cardPosition() = when (stateMachine.currentState()) {
+        CardFlowState.INACTIVE_CARD_NUMBER -> CardPosition.INACTIVE
+        CardFlowState.ACTIVE_CARD_NUMBER, CardFlowState.EXPIRATION, CardFlowState.HOLDER -> CardPosition.ACTIVE_FRONT
+        CardFlowState.CVV -> CardPosition.ACTIVE_BOTTOM
+    }
+
+    private enum class CardPosition {
+        INACTIVE, ACTIVE_FRONT, ACTIVE_BOTTOM
     }
 
     @Suppress("DEPRECATION")
@@ -673,13 +683,16 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     private inner class CardFlowStateMachine {
-        private var state: CardFlowState = CardFlowState.CARD_NUMBER
+        private var state: CardFlowState = CardFlowState.INACTIVE_CARD_NUMBER
 
-        fun nextState() {
+        fun changeStateToNextWithAction() {
             when (state) {
-                CardFlowState.CARD_NUMBER -> run {
+                CardFlowState.INACTIVE_CARD_NUMBER -> {
+                    mCreditCardFlowListener?.onInactiveCardNumberBeforeChangeToNext()
+                }
+                CardFlowState.ACTIVE_CARD_NUMBER -> run {
                     view_pager.currentItem = 1
-                    mCreditCardFlowListener?.onCardNumberBeforeChangeToNext()
+                    mCreditCardFlowListener?.onActiveCardNumberBeforeChangeToNext()
                 }
                 CardFlowState.EXPIRATION -> run {
                     view_pager.currentItem = 2
@@ -694,13 +707,16 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     mCreditCardFlowListener?.onCardCvvBeforeChangeToNext()
                 }
             }
-            changeStateToNext()
+            changeStateToNextWithoutAction()
         }
 
-        fun previousState() {
+        fun changeStateToPreviousWithAction() {
             when (state) {
-                CardFlowState.CARD_NUMBER -> run {
-                    mCreditCardFlowListener?.onCardNumberBeforeChangeToPrevious()
+                CardFlowState.INACTIVE_CARD_NUMBER -> {
+                    mCreditCardFlowListener?.onInactiveCardNumberBeforeChangeToPrevious()
+                }
+                CardFlowState.ACTIVE_CARD_NUMBER -> run {
+                    mCreditCardFlowListener?.onActiveCardNumberBeforeChangeToPrevious()
                 }
                 CardFlowState.EXPIRATION -> run {
                     view_pager.currentItem = 0
@@ -716,24 +732,26 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                     mCreditCardFlowListener?.onCardCvvBeforeChangeToPrevious()
                 }
             }
-            changeStateToPrevious()
+            changeStateToPreviousWithoutAction()
         }
 
         fun currentState() = state
 
-        private fun changeStateToNext() {
+        private fun changeStateToNextWithoutAction() {
             state = when (state) {
-                CardFlowState.CARD_NUMBER -> CardFlowState.EXPIRATION
+                CardFlowState.INACTIVE_CARD_NUMBER -> CardFlowState.ACTIVE_CARD_NUMBER
+                CardFlowState.ACTIVE_CARD_NUMBER -> CardFlowState.EXPIRATION
                 CardFlowState.EXPIRATION -> CardFlowState.HOLDER
                 CardFlowState.HOLDER -> CardFlowState.CVV
                 CardFlowState.CVV -> CardFlowState.CVV
             }
         }
 
-        private fun changeStateToPrevious() {
+        fun changeStateToPreviousWithoutAction() {
             state = when (state) {
-                CardFlowState.CARD_NUMBER -> CardFlowState.CARD_NUMBER
-                CardFlowState.EXPIRATION -> CardFlowState.CARD_NUMBER
+                CardFlowState.INACTIVE_CARD_NUMBER -> CardFlowState.INACTIVE_CARD_NUMBER
+                CardFlowState.ACTIVE_CARD_NUMBER -> CardFlowState.INACTIVE_CARD_NUMBER
+                CardFlowState.EXPIRATION -> CardFlowState.ACTIVE_CARD_NUMBER
                 CardFlowState.HOLDER -> CardFlowState.EXPIRATION
                 CardFlowState.CVV -> CardFlowState.HOLDER
             }

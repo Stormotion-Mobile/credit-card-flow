@@ -60,7 +60,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
         mNextMenuItem = menu.findItem(R.id.ic_next)
         mNextMenuItem.actionView.setOnClickListener {
             when (mCreditCardFlow.currentState()) {
-                CardFlowState.CARD_NUMBER -> mCreditCardFlow.validateCreditCardNumber()
+                CardFlowState.ACTIVE_CARD_NUMBER -> mCreditCardFlow.validateCreditCardNumber()
                 CardFlowState.EXPIRATION -> mCreditCardFlow.validateCreditCardExpiryDate()
                 CardFlowState.HOLDER -> mCreditCardFlow.validateCreditCardHolder()
                 CardFlowState.CVV -> mCreditCardFlow.validateCreditCardCVV()
@@ -91,7 +91,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                     io.stormotion.creditcardflow.credit_card_flow.CreditCard(it.number, it.holderName, it.cvc, it.expiryDate)
                 })
                 setCreditCardFlowListener(object : CreditCardFlowListener {
-                    override fun onCardNumberBeforeChangeToNext() {
+                    override fun onActiveCardNumberBeforeChangeToNext() {
                     }
 
                     override fun onCardExpiryDateBeforeChangeToNext() {
@@ -115,7 +115,14 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                     }
 
 
-                    override fun onCardNumberBeforeChangeToPrevious() {
+                    override fun onActiveCardNumberBeforeChangeToPrevious() {
+                        activity!!.finish()
+                    }
+
+                    override fun onInactiveCardNumberBeforeChangeToNext() {
+                    }
+
+                    override fun onInactiveCardNumberBeforeChangeToPrevious() {
                         activity!!.finish()
                     }
 
@@ -208,7 +215,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                 showKeyboard(activity, input_edit_cvv_code)
             }
             add_edit_card_steps_view_flipper.displayedChild == PositionInViewFlipper.CREDIT_CARD_SUCCESS -> activity.finish()
-            mCreditCardFlow.currentState() != CardFlowState.CARD_NUMBER -> mCreditCardFlow.previousState()
+            mCreditCardFlow.currentState() != CardFlowState.ACTIVE_CARD_NUMBER -> mCreditCardFlow.previousState()
             else -> handleBackPressed(activity)
         }
 
