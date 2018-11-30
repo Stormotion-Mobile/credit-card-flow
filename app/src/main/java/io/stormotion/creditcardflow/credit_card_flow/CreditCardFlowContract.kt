@@ -10,6 +10,7 @@ interface CreditCardFlowContract {
         fun validateCreditCardHolder(creditCardHolder: String)
         fun validateCreditCardExpiryDate(creditExpiryDate: String)
         fun validateCreditCardCVV(creditCVV: String)
+        fun checkCurrentCardPosition(state: CardFlowState, creditCard: CreditCard)
     }
 
     interface View : BaseView<Presenter> {
@@ -28,5 +29,8 @@ interface CreditCardFlowContract {
 
         fun showCreditCardCvvValidatedSuccessfully()
         fun showCreditCardCvvFailedToValidate()
+
+        fun showCreditCardActiveFront(creditCardEnum: CreditCardEnum)
+        fun showCreditCardActiveBottom(creditCardEnum: CreditCardEnum)
     }
 }

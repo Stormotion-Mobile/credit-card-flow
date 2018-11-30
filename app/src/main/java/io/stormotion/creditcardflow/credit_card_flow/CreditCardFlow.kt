@@ -70,11 +70,11 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
         val ss = SavedState(superState)
 
-        ss.cardToSave = CreditCard(creditCardNumber(),
+        ss.cardFlowDataToSave = SavedState.CardFlowData(stateMachine.currentState(), CreditCard(creditCardNumber(),
                 creditCardHolder(),
                 creditCardCvvCode(),
                 creditCardExpiryDate()
-        )
+        ).copy(number = creditCardNumber().removeNotDigits().toString()))
 
         return ss
     }
@@ -87,7 +87,11 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
         super.onRestoreInstanceState(state.superState)
 
-        this.card = state.cardToSave
+        with(state.cardFlowDataToSave) {
+            card = creditCard
+            stateMachine.setState(this.state)
+            mPresenter.checkCurrentCardPosition(this.state, card!!)
+        }
     }
 
     override fun showCreditCardLogo(creditCardEnum: CreditCardEnum) {
@@ -102,6 +106,22 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         flipBetweenActiveFrontAndInactiveAppearance(null,
                 null,
                 toActive = false)
+    }
+
+    override fun showCreditCardActiveBottom(creditCardEnum: CreditCardEnum) {
+        credit_card_active_bottom_side.alpha = 1f
+        credit_card_inactive.alpha = 0f
+        val logoDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.cardDrawable!!)
+        val gradientDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.gradientDrawable!!)
+        setCreditCardLogoAppearance(logoDrawable, gradientDrawable)
+    }
+
+    override fun showCreditCardActiveFront(creditCardEnum: CreditCardEnum) {
+        credit_card_active_front_side.alpha = 1f
+        credit_card_inactive.alpha = 0f
+        val logoDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.cardDrawable!!)
+        val gradientDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.gradientDrawable!!)
+        setCreditCardLogoAppearance(logoDrawable, gradientDrawable)
     }
 
     override fun showCreditCardNumberValidatedSuccessfully() {
@@ -122,7 +142,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     override fun showCreditCardHolderFailedToValidate() {
         context!!.toast(R.string.credit_card_holder_is_not_valid)
         mCreditCardFlowListener?.onCardHolderValidationFailed(creditCardHolder())
-
     }
 
     override fun showCreditCardExpiryDateValidatedSuccessfully() {
@@ -736,6 +755,10 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         }
 
         fun currentState() = state
+
+        fun setState(state: CardFlowState) {
+            this.state = state
+        }
 
         private fun changeStateToNextWithoutAction() {
             state = when (state) {

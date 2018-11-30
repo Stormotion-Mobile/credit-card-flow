@@ -23,6 +23,15 @@ class CreditCardFlowPresenter(val view: CreditCardFlowContract.View) : CreditCar
         }
     }
 
+    override fun checkCurrentCardPosition(state: CardFlowState, creditCard: CreditCard) {
+        val creditCardEnum = CreditCardEnum.getCreditCardByNumber(creditCard.number!!)
+        if (state == CardFlowState.CVV) {
+            view.showCreditCardActiveBottom(creditCardEnum)
+        } else if (creditCardEnum != CreditCardEnum.UNKNOWN) {
+            view.showCreditCardActiveFront(creditCardEnum)
+        }
+    }
+
     override fun validateCreditCardNumber(creditCardNumber: String) {
         val creditCardEnum = CreditCardEnum.getCreditCardByNumber(creditCardNumber)
         if (creditCardEnum != CreditCardEnum.UNKNOWN) {
