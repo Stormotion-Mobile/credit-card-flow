@@ -264,6 +264,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     fun validateCreditCardExpiryDate() {
+        optionallyFillExpirationDateMonth()
         mPresenter.validateCreditCardExpiryDate(creditCardExpiryDate())
     }
 
@@ -470,7 +471,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         input_edit_expiry_date.setOnEditorActionListener({ _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                optionallyFillExpirationDateMonth()
                 validateCreditCardExpiryDate()
                 handled = true
             }
