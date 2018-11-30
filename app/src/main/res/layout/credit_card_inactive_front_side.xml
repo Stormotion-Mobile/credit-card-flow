@@ -3,17 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/credit_card_inactive"
+    style="@style/CardStyle"
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_height"
-    android:layout_marginEnd="32dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginRight="32dp"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="16dp"
-    android:alpha="1"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="12dp"
-    app:cardPreventCornerOverlap="false">
+    android:alpha="1">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,17 +66,17 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="10sp"
-            android:maxLines="1"
             android:lines="1"
+            android:maxLines="1"
             android:text="@string/label_card_holder"
             android:textColor="#b2b2b2"
-            app:layout_constraintRight_toLeftOf="@+id/guideline"
             android:textSize="20sp"
             android:textStyle="normal"
             android:typeface="monospace"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/inactive_card_holder_header"
-            tools:text="asddsadasda das das asdasdasd"/>
+            tools:text="asddsadasda das das asdasdasd" />
 
 
         <TextView

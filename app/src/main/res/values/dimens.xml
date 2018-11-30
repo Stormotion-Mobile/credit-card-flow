@@ -1,40 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textview_error_popup_default_width">5dp</dimen>
-    <dimen name="option_error_start_translation_y">-50dp</dimen>
-    <dimen name="common_corner_radius">5dp</dimen>
-    <dimen name="country_list_width">280dp</dimen>
-    <dimen name="country_list_height">448dp</dimen>
-    <dimen name="login_like_horizontal_padding">25dp</dimen>
     <dimen name="card_height">200dp</dimen>
-
-
-    <!-- Hotel details screen dimensions -->
-    <dimen name="image_hotel_width">360dp</dimen>
-    <dimen name="image_hotel_height">200dp</dimen>
-    <dimen name="text_width">305dp</dimen>
-    <dimen name="content_margin">15dp</dimen>
-    <dimen name="margin_second_divider">16dp</dimen>
-    <dimen name="star_width">42dp</dimen>
-    <dimen name="star_height">24dp</dimen>
-    <dimen name="star_padding">4dp</dimen>
-    <dimen name="star_padding_large">8dp</dimen>
-    <dimen name="margin_small">5dp</dimen>
-    <dimen name="margin_medium">10dp</dimen>
-    <dimen name="padding_hotel_header">20dp</dimen>
-
-    <dimen name="text_hotel_size_big">22sp</dimen>
-    <dimen name="text_hotel_title_size">18sp</dimen>
-    <dimen name="text_normal_hotel_size">16sp</dimen>
-    <dimen name="text_hotel_size_small">14sp</dimen>
-    <dimen name="text_amenities_size">13sp</dimen>
-    <dimen name="line_spacing_amenities">1dp</dimen>
-    <dimen name="line_spacing_small">2sp</dimen>
-    <dimen name="line_spacing_normal">8sp</dimen>
-    <dimen name="line_spacing_large">10sp</dimen>
-    <dimen name="line_spacing_extra_large">46sp</dimen>
-    <dimen name="divider_height">1dp</dimen>
-    <dimen name="date_with">165dp</dimen>
-    <dimen name="details_header_height">64dp</dimen>
-    <integer name="animation_time">200</integer>
 </resources>
