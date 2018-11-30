@@ -20,6 +20,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import io.stormotion.creditcardflow.R
 import io.stormotion.creditcardflow.afterTextChanged
+import io.stormotion.creditcardflow.removeNotDigits
 import kotlinx.android.synthetic.main.credit_card_active_bottom_side.view.*
 import kotlinx.android.synthetic.main.credit_card_active_front_side.view.*
 import kotlinx.android.synthetic.main.credit_card_flow.view.*
@@ -74,7 +75,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 creditCardHolder(),
                 creditCardCvvCode(),
                 creditCardExpiryDate()
-        ).copy(number = creditCardNumber().removeNotDigits().toString()))
+        ))
 
         return ss
     }
@@ -279,7 +280,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     fun currentState() = stateMachine.currentState()
 
     fun validateCreditCardNumber() {
-        mPresenter.validateCreditCardNumber(creditCardNumber().removeNotDigits().toString())
+        mPresenter.validateCreditCardNumber(creditCardNumber())
     }
 
     fun validateCreditCardExpiryDate() {
@@ -296,8 +297,9 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     @SuppressWarnings("unused")
-    fun creditCardType() = CreditCardEnum.getCreditCardByNumber(creditCardNumberWithoutNotDigits())
+    fun creditCardType() = CreditCardEnum.getCreditCardByNumber(creditCardNumber())
 
+    @SuppressWarnings("unused")
     fun creditCardNumberWithoutNotDigits() = creditCardNumber().removeNotDigits().toString()
 
     fun creditCardNumber() = input_edit_card_number.text.toString()
@@ -471,7 +473,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         if (input_edit_expiry_date.text!!.length == 4 &&
                 input_edit_expiry_date.text!!.startsWith("1")) {
             var input = creditCardExpiryDate()
-            input = input.replace("/", "");
+            input = input.replace("/", "")
             val buffer = StringBuffer("0$input")
             buffer.insert(buffer.length - 2, "/")
             input_edit_expiry_date.text!!.replace(0, input_edit_expiry_date.text!!.length, buffer.toString())
@@ -521,8 +523,6 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
             input_edit_cvv_code.setText(cvc)
         }
     }
-
-    private fun CharSequence.removeNotDigits() = filter { it.isDigit() }
 
     private fun prettyFormatCreditCardNumber(s: String): String {
         val sb = StringBuilder(s)
@@ -574,7 +574,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
                 val checkCardNumber = {
                     //though it is called onAnimationEnd, isRunning still can return true, so we add it to message queue
                     Handler().post {
-                        mPresenter.getCreditCardLogo(creditCardNumberWithoutNotDigits())
+                        mPresenter.getCreditCardLogo(creditCardNumber())
                     }
                 }
                 outSet!!.setTarget(outTarget)

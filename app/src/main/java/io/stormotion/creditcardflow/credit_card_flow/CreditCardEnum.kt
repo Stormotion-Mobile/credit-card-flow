@@ -2,6 +2,7 @@ package io.stormotion.creditcardflow.credit_card_flow
 
 import android.support.annotation.DrawableRes
 import io.stormotion.creditcardflow.R
+import io.stormotion.creditcardflow.removeNotDigits
 import java.util.regex.Pattern
 
 enum class CreditCardEnum(val naming: String?, @DrawableRes val cardDrawable: Int?, @DrawableRes val gradientDrawable: Int?, val pattern: String?) {
@@ -14,6 +15,8 @@ enum class CreditCardEnum(val naming: String?, @DrawableRes val cardDrawable: In
     UNKNOWN(null, null, null, null);
 
     companion object {
-        fun getCreditCardByNumber(creditCardNumber: String) = values().filter { it.pattern != null }.singleOrNull { Pattern.compile(it.pattern).matcher(creditCardNumber).matches() } ?: UNKNOWN
+        fun getCreditCardByNumber(creditCardNumber: String) = values().filter { it.pattern != null }.singleOrNull {
+            Pattern.compile(it.pattern).matcher(creditCardNumber.removeNotDigits()).matches()
+        } ?: UNKNOWN
     }
 }

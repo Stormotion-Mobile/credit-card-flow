@@ -31,6 +31,8 @@ fun EditText.afterTextChanged(action: (Editable) -> Unit) {
 
 }
 
+fun CharSequence.removeNotDigits() = filter { it.isDigit() }
+
 fun Activity.closeSoftKeyboard() {
     // Check if no view has focus:
     val view = currentFocus
