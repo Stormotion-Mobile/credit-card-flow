@@ -37,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_toStartOf="@id/text_cvc_container"
                 android:layout_toLeftOf="@id/text_cvc_container"
+                android:layout_toStartOf="@id/text_cvc_container"
                 android:orientation="vertical">
 
                 <View
@@ -110,7 +110,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/cvv_container"
             android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp" />
 
     </RelativeLayout>
 

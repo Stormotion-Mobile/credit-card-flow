@@ -30,8 +30,9 @@
 
     <style name="CardStyle">
         <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">32dp</item>
-        <item name="android:layout_marginLeft">32dp</item>
-        <item name="android:layout_marginRight">32dp</item>
+        <item name="android:layout_marginLeft">@dimen/card_margin</item>
+        <item name="android:layout_marginRight">@dimen/card_margin</item>
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">32dp</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="cardCornerRadius">12dp</item>

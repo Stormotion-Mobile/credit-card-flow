@@ -1,6 +1,7 @@
 package io.stormotion.creditcardflow.credit_card_flow
 
 import android.animation.*
+import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -12,6 +13,7 @@ import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.text.InputType
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
@@ -34,6 +36,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     companion object {
         //spacing between 4 digits of credit number
         private const val SPACING_CREDIT_NUMBER = "   "
+        private const val WIDTH_TO_HEIGHT_RATIO = 1.57
     }
 
     private var inSet: AnimatorSet? = null
@@ -313,6 +316,19 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
 
     private fun init() {
         View.inflate(context, R.layout.credit_card_flow, this)
+
+        val displayMetrics = DisplayMetrics()
+        (context as Activity).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics)
+        listOf(findViewById<View>(R.id.credit_card_active_bottom_side),
+                findViewById<View>(R.id.credit_card_active_front_side),
+                findViewById<View>(R.id.credit_card_inactive)
+        ).forEach { card ->
+            card.layoutParams = card.layoutParams.apply {
+                width = Math.min(resources.getDimension(R.dimen.card_height) * WIDTH_TO_HEIGHT_RATIO,
+                        displayMetrics.widthPixels - resources.getDimension(R.dimen.card_margin) * 2.0
+                ).toInt()
+            }
+        }
 
         CreditCardFlowPresenter(this)
 
