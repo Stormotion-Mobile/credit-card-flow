@@ -3,9 +3,6 @@
   <component name="AndroidDexCompilerConfiguration">
     <option name="VM_OPTIONS" value="--stacktrace --debug" />
   </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="--stacktrace --debug" />
-  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
