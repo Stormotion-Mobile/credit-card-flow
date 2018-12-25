@@ -63,7 +63,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                 CardFlowState.EXPIRATION -> mCreditCardFlow.validateCreditCardExpiryDate()
                 CardFlowState.HOLDER -> mCreditCardFlow.validateCreditCardHolder()
                 CardFlowState.CVV -> mCreditCardFlow.validateCreditCardCVV()
-                null -> {
+                else -> {
                 }
             }
         }
