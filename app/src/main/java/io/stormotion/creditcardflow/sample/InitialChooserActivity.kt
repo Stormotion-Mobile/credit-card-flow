@@ -12,11 +12,11 @@ class InitialChooserActivity : AppCompatActivity() {
     }
 
 
-    fun addCreditCard(view: View) {
+    fun addCreditCard(@Suppress("UNUSED_PARAMETER") view: View) {
         startActivity(AddEditCardActivity.getInstance(this, null))
     }
 
-    fun editCreditCard(view: View) {
+    fun editCreditCard(@Suppress("UNUSED_PARAMETER") view: View) {
         startActivity(AddEditCardActivity.getInstance(this,
                 CreditCard(
                         "5454 5454 5454 5454",
