@@ -7,7 +7,7 @@
     android:measureAllChildren="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <io.stormotion.creditcardflow.credit_card_flow.CreditCardFlow
+    <io.stormotion.creditcardflow.CreditCardFlow
         android:id="@+id/credit_card_flow"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

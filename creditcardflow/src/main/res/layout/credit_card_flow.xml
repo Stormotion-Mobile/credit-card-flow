@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/divider"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/credit_card_active_bottom_side" />
+
+            <include layout="@layout/credit_card_active_front_side" />
+
+            <include layout="@layout/credit_card_inactive_front_side" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_above="@+id/view_pager"
+        android:background="@drawable/cards_add_edit_divider" />
+
+
+    <io.stormotion.creditcardflow.WrapContentHeightViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="16dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_edit_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_card_number"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingTop="8dp"
+                android:textColorHint="#1a1a1a"
+                android:textSize="24sp"
+                tools:text="4242 4242 4242 4242" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_expiry_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_edit_expiry_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_expired_date"
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:longClickable="false"
+                android:maxLength="5"
+                android:paddingTop="8dp"
+                android:textColorHint="#1a1a1a"
+                android:textIsSelectable="false"
+                android:textSize="24sp"
+                tools:text="12/19" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_card_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_edit_card_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_card_holder"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textNoSuggestions"
+                android:paddingTop="8dp"
+                android:textColorHint="#1a1a1a"
+                android:textSize="24sp"
+                tools:text="12/19" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_cvv_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/input_edit_cvv_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_cvv_code"
+                android:imeOptions="actionNext"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:paddingTop="8dp"
+                android:textColorHint="#1a1a1a"
+                android:textSize="24sp"
+                tools:text="12/19" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </io.stormotion.creditcardflow.WrapContentHeightViewPager>
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginTop="-4dp"
+        android:progress="25" />
+
+</merge>

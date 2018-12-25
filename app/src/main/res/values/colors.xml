@@ -8,7 +8,4 @@
 
     <color name="settingsColor">#142d5a</color>
     <color name="dividerBackground">#eaeaea</color>
-    <color name="light_gray">#ffffff</color>
-    <color name="translucent_white">#80FFFFFF</color>
-    <color name="dark_gray">#243037</color>
 </resources>

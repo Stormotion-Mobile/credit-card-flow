@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CreditCardFlow</string>
+
+    <string name="credit_card_number_is_not_valid">Credit card number is not valid</string>
+    <string name="credit_card_holder_is_not_valid">Credit card\'s holder is not valid</string>
+    <string name="credit_card_expiry_date_is_not_valid">Credit card\'s expiry date is not valid</string>
+    <string name="credit_card_cvv_is_not_valid">Credit card\'s CVV is not valid</string>
+    <string name="error_expiry_date_in_the_past">Credit card expiry date is in the past. Please make sure to enter a valid credit card!</string>
+
+    <string name="label_card_number" translatable="false">0000 0000 0000 0000</string>
+    <string name="label_expired_date" translatable="false">00/00</string>
+    <string name="label_card_holder">Your Name</string>
+    <string name="label_cvv_code" translatable="false">CVC</string>
+    <string name="hint_card_number">Card Number</string>
+    <string name="hint_expired_date">Expiration</string>
+    <string name="hint_card_holder">Card Holder</string>
+    <string name="hint_cvv_code" translatable="false">CVC</string>
+</resources>

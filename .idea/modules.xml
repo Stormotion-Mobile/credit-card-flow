@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CreditCardFlow.iml" filepath="$PROJECT_DIR$/CreditCardFlow.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/creditcardflow/creditcardflow.iml" filepath="$PROJECT_DIR$/creditcardflow/creditcardflow.iml" />
     </modules>
   </component>
 </project>
