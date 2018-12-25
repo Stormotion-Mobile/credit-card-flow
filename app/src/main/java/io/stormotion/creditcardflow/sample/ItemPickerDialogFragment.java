@@ -2,7 +2,6 @@ package io.stormotion.creditcardflow.sample;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Dialog fragment that allows user to select an item from a list
  */
-public class ItemPickerDialogFragment extends DialogFragment {
+public class ItemPickerDialogFragment extends android.support.v4.app.DialogFragment {
 
     private OnItemSelectedListener listener;
 

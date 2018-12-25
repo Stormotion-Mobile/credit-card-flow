@@ -2,7 +2,6 @@ package io.stormotion.creditcardflow.sample
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.FragmentManager
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -167,7 +166,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
             })
         }
 
-        configureTypeAndPriorityViews(activity!!.fragmentManager)
+        configureTypeAndPriorityViews(activity!!.supportFragmentManager)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -257,10 +256,10 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
         val builder = AlertDialog.Builder(activity)
         builder.setTitle(R.string.dialog_confirmation)
         builder.setMessage(R.string.dialog_card_confirmation_text)
-        builder.setPositiveButton(R.string.yes) { dialogInterface, which ->
+        builder.setPositiveButton(R.string.yes) { _, _ ->
             activity.finish()
         }
-        builder.setNegativeButton(R.string.no) { dialogInterface, which ->
+        builder.setNegativeButton(R.string.no) { dialogInterface, _ ->
             dialogInterface.dismiss()
         }
         val dialog = builder.create()
@@ -278,7 +277,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                 || !TextUtils.isEmpty(cvv)
     }
 
-    private fun configureTypeAndPriorityViews(fragmentManager: FragmentManager) {
+    private fun configureTypeAndPriorityViews(fragmentManager: android.support.v4.app.FragmentManager) {
         credit_card_priority.setOnClickListener {
             val priorityPrimary = resources.getString(R.string.credit_card_priority_primary)
             val prioritySecondary = resources.getString(R.string.credit_card_priority_secondary)

@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.credit_card_flow.view.*
 import kotlinx.android.synthetic.main.credit_card_inactive_front_side.view.*
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
+import org.jetbrains.annotations.NotNull
 
 //TODO add method which returns CreditCard
 class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
@@ -68,6 +69,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         mPresenter.unsubscribe()
     }
 
+    @NotNull
     override fun onSaveInstanceState(): Parcelable {
         val superState = super.onSaveInstanceState()
 
