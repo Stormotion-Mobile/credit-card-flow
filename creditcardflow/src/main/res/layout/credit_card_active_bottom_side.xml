@@ -83,7 +83,7 @@
                     android:fontFamily="sans-serif"
                     android:maxLines="1"
                     android:text="0000"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/card_cvv_text_size"
                     android:visibility="invisible"
                     tools:ignore="HardcodedText" />
 
@@ -96,7 +96,7 @@
                     android:maxLines="1"
                     android:textAllCaps="true"
                     android:textColor="#232323"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/card_cvv_text_size"
                     android:textStyle="normal"
                     tools:text="123" />
             </FrameLayout>
