@@ -10,7 +10,6 @@ import io.stormotion.creditcardflow.CreditCardFlow
 import io.stormotion.creditcardflow.CreditCardFlowListener
 import io.stormotion.creditcardflow.sample.mvp.BaseFragment
 import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
 
 
 class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEditCardContract.View {
