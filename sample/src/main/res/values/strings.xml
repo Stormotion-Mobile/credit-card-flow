@@ -4,31 +4,11 @@
     <string name="credit_cards_add_edit_add_title">Add new Card</string>
     <string name="credit_cards_add_edit_edit_title">Edit Card</string>
     <string name="credit_cards_ic_next">Next</string>
-    <string name="credit_card_type_hint">Type</string>
-    <string name="credit_card_priority_hint">Priority</string>
-    <string name="credit_card_save">Save Card</string>
-    <string name="credit_card_set_type_title">Set Type</string>
-    <string name="credit_card_set_priority_title">Set Priority</string>
-    <string name="credit_card_priority_primary">Primary</string>
-    <string name="credit_card_priority_secondary">Secondary</string>
-    <string name="credit_card_type_business">Business</string>
-    <string name="credit_card_type_personal">Personal</string>
-    <string name="credit_card_type_is_empty">Choose one of credit card\'s types</string>
-    <string name="credit_card_priority_is_empty">Choose one of credit card\'s priorities</string>
-    <string name="credit_card_failed_to_save">Failed to save credit card</string>
-    <string name="credit_card_successfully_saved_title">Successfully saved!</string>
-    <string name="credit_card_successfully_saved_back_to_payment_options">Back to payment options</string>
+    <string name="credit_card_successfully_saved">Successfully saved!</string>
     <string name="credit_card_number_format" translatable="false">•••• %1$s</string>
-
-    <string name="dialog_card_confirmation_text">Are you sure, you want to quit this screen? All unsaved changes will be lost.</string>
-    <string name="dialog_confirmation">Please confirm</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
 
     <string name="font_family_regular" translatable="false">sans-serif</string>
 
-    <string name="alert_ok">Set</string>
-    <string name="alert_cancel">Cancel</string>
     <string name="edit_credit_card">Edit credit card</string>
     <string name="add_credit_card">Add credit card</string>
 </resources>

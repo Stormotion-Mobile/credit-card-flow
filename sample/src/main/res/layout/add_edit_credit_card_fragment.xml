@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/add_edit_card_steps_view_flipper"
+<io.stormotion.creditcardflow.CreditCardFlow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/credit_card_flow"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:measureAllChildren="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="match_parent" />
 
-    <io.stormotion.creditcardflow.CreditCardFlow
-        android:id="@+id/credit_card_flow"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <include
-        android:id="@+id/credit_card_type_and_priority"
-        layout="@layout/credit_card_type_and_priority" />
-
-    <include
-        android:id="@+id/credit_card_successfully_added"
-        layout="@layout/credit_card_successfully_added" />
-
-</ViewFlipper>
