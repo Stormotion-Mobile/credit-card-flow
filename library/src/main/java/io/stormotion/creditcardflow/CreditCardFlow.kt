@@ -168,7 +168,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         stateMachine.changeStateToNextWithAction()
         mCreditCardFlowListener?.apply {
             onCardCvvValidatedSuccessfully(creditCardCvvCode())
-            onCreditCardFlowFinished(creditCardNumber(), creditCardExpiryDate(), creditCardHolder(), creditCardCvvCode())
+            onCreditCardFlowFinished(CreditCard(creditCardNumber(), creditCardExpiryDate(), creditCardHolder(), creditCardCvvCode()))
         }
     }
 

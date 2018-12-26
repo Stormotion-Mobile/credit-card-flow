@@ -25,5 +25,5 @@ interface CreditCardFlowListener {
 
     fun onFromActiveToInactiveAnimationStart()
     fun onFromInactiveToActiveAnimationStart()
-    fun onCreditCardFlowFinished(cardNumber: String, cardExpiryDate: String, cardHolder: String, cardCvvCode: String)
+    fun onCreditCardFlowFinished(creditCard: CreditCard)
 }

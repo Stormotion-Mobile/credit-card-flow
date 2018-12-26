@@ -142,7 +142,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                     override fun onCardCvvValidationFailed(cvv: String) {
                     }
 
-                    override fun onCreditCardFlowFinished(cardNumber: String, cardExpiryDate: String, cardHolder: String, cardCvvCode: String) {
+                    override fun onCreditCardFlowFinished(creditCard: io.stormotion.creditcardflow.CreditCard) {
                         mNextMenuItem.isVisible = false
                         activity!!.closeSoftKeyboard()
                         save()
