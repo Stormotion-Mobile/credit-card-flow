@@ -9,6 +9,7 @@ import io.stormotion.creditcardflow.CardFlowState
 import io.stormotion.creditcardflow.CreditCardFlow
 import io.stormotion.creditcardflow.CreditCardFlowListener
 import io.stormotion.creditcardflow.sample.mvp.BaseFragment
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
 
@@ -146,7 +147,7 @@ class AddEditCardFragment : BaseFragment<AddEditCardContract.Presenter>(), AddEd
                         mNextMenuItem.isVisible = false
                         activity!!.closeSoftKeyboard()
                         save()
-                        context.toast(R.string.credit_card_successfully_saved)
+                        context.longToast(resources.getString(R.string.credit_card_successfully_saved, creditCard))
                     }
                 })
             })

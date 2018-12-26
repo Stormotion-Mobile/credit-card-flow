@@ -4,7 +4,7 @@
     <string name="credit_cards_add_edit_add_title">Add new Card</string>
     <string name="credit_cards_add_edit_edit_title">Edit Card</string>
     <string name="credit_cards_ic_next">Next</string>
-    <string name="credit_card_successfully_saved">Successfully saved!</string>
+    <string name="credit_card_successfully_saved">%1$s successfully saved!</string>
     <string name="credit_card_number_format" translatable="false">•••• %1$s</string>
 
     <string name="font_family_regular" translatable="false">sans-serif</string>
