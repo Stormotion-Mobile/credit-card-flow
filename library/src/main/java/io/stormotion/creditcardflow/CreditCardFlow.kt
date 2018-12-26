@@ -127,6 +127,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
         val logoDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.cardDrawable!!)
         val gradientDrawable = ContextCompat.getDrawable(context!!, creditCardEnum.gradientDrawable!!)
         setCreditCardLogoAppearance(logoDrawable, gradientDrawable)
+        stateMachine.setState(CardFlowState.ACTIVE_CARD_NUMBER)
     }
 
     override fun showCreditCardNumberValidatedSuccessfully() {
@@ -545,6 +546,7 @@ class CreditCardFlow : RelativeLayout, CreditCardFlowContract.View {
     }
 
     private fun updateViews() {
+        mPresenter.checkIfShouldShowActiveFrontImmediately(stateMachine.currentState(), card?.number)
         (card?.let { it } ?: CreditCard()).apply {
             input_edit_card_number.setText(number)
             input_edit_expiry_date.setText(expiryDate)

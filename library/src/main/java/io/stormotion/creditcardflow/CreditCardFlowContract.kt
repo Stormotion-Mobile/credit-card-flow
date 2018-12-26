@@ -6,6 +6,7 @@ import io.stormotion.creditcardflow.mvp.BaseView
 interface CreditCardFlowContract {
     interface Presenter : BasePresenter {
         fun getCreditCardLogo(creditCardNumber: String)
+        fun checkIfShouldShowActiveFrontImmediately(state: CardFlowState, creditCardNumber: String?)
         fun validateCreditCardNumber(creditCardNumber: String)
         fun validateCreditCardHolder(creditCardHolder: String)
         fun validateCreditCardExpiryDate(creditExpiryDate: String)
